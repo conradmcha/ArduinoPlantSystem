@@ -18,26 +18,21 @@ DHT dht(DHTPIN, DHTTYPE);
 
 //variables
 unsigned long elapsed;
-int lightData [48];
-int moistData [48];
-float tempData [48];
-float tempHumitidy [48];
- float hours,minutes,seconds,ms;
-  unsigned long over;
-  int fanRelay = 6;
-
- 
-
-int timeCounter=0;
+float hours,minutes,seconds,ms;
+unsigned long over;
+int fanRelay = 6;
 int lightRelay = 5; 
+
+
 
 void setup() {
   Serial.begin(9600);   
     Serial.println("Program Start!");
   dht.begin();
   pinMode(fanRelay, OUTPUT);     
-  
+  pinMode(lightRelay, OUTPUT);
 }
+
 
 int melody[] = {
   NOTE_C4, NOTE_G3,NOTE_G3, NOTE_A3, NOTE_G3,0, NOTE_B3, NOTE_C4};
@@ -82,12 +77,15 @@ void loop() {
   seconds=int(over/1000);
   ms=over%1000;
   
-    if ((int)minutes%30==0)// && (int)minutes!= 0)
+    if ((int)minutes%30==0 && (int)minutes!= 0)
   {
          digitalWrite(fanRelay, HIGH);   // turn the LED on (HIGH is the voltage level)
-  delay(120000);               // wait for a second
+  }
+    if ((int)minutes%35==0 && (int)minutes!= 0)
+  {
   digitalWrite(fanRelay, LOW);    // turn the LED off by making the voltage LOW
   }
+  
   
 
   if (moistSensor < 850 && (int)minutes%5==0 && (int)minutes!= 0)  // Change to Good Value
@@ -105,14 +103,18 @@ void loop() {
   {
     digitalWrite(lightRelay, HIGH);
   }
+  else
+  {
+    digitalWrite(lightRelay, LOW);
+  }
   
  if( (int)hours%18 == 0 && hours != 0 )
  {
-   int currentTime = hours + 6;
-   while(int(millis()/3600000) < currentTime)
-   {
      digitalWrite(lightRelay, HIGH);
-   }
+ }
+ if( (int)hours%23 == 0 && hours != 0 )
+ {
+     digitalWrite(lightRelay, LOW);
  }
   
 
