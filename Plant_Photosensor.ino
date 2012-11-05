@@ -21,7 +21,8 @@ unsigned long elapsed;
 float hours,minutes,seconds,ms;
 unsigned long over;
 int fanRelay = 6;
-int lightRelay = 5; 
+int lightRelay = 7; 
+int moistPin = 4;
 
 
 
@@ -65,7 +66,7 @@ void loop() {
   }
   
   int moistSensor;
-  moistSensor = analogRead(5);
+  moistSensor = analogRead(moistPin);
   Serial.print("Moist reading = ");
   Serial.println(moistSensor); 
 
@@ -86,7 +87,7 @@ void loop() {
   digitalWrite(fanRelay, LOW);    // turn the LED off by making the voltage LOW
   }
   
-  
+  /*
 
   if (moistSensor < 850 && (int)minutes%5==0 && (int)minutes!= 0)  // Change to Good Value
   {
@@ -96,7 +97,9 @@ void loop() {
     int pauseBetweenNotes = noteDuration * 1.30;
     delay(pauseBetweenNotes);
     noTone(8);
+   }
   }
+  */
   
   
   if ( photocellReading > 600 )
@@ -118,5 +121,5 @@ void loop() {
  }
   
 
-  }
+  
 }
