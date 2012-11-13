@@ -1,4 +1,4 @@
-Arduino Plant System
+# Arduino Plant System
 
 Checks Temperature/Humidity/Moist/Light
 
@@ -18,3 +18,9 @@ Upcoming:
 
 2012/10/7
  Code by Conrad Chamerski
+
+
+## Instructions  
+
+1. 
+
